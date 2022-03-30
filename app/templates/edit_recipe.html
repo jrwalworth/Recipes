@@ -33,7 +33,7 @@
     <div class="container a-form">
         <div class="row">
             <div class="col">
-                <form action='/recipes/{{recipe.id}}/update' class='myForm recipeForm' method='post'>
+                <form action='/recipes/update' class='myForm recipeForm' method='post'>
                     <div class="m-area mb-3 d-flex justify-content-between">
                         <div class="col p-3">
                             <label for="name" class="text-light mb-1">Name:</label>
@@ -43,7 +43,7 @@
                             <label for="instructions" class="text-light mb-1">Instructions:</label>
                             <textarea name="instructions" id="instructions" cols="30" rows="5" class="mb-4 form-control">{{recipe.instructions}}</textarea>
                             <input type='submit' value="Edit Recipe" class="btn btn-primary btn-block">
-                            <input type="hidden" name="user_id" value="{{session.user_id}}">
+                            <!-- <input type="hidden" name="user_id" value="{{session.user_id}}"> -->
                         </div>
                         <div class="col">
                             <label for="date_made" class="text-light mt-3 mb-1">Date Made:</label>
@@ -51,11 +51,11 @@
                             <fieldset>
                                 <label for="under_30" class="text-light mb-1">Under 30 minutes?</label>
                                 <section class="d-flex align-items-center ms-3">
-                                    <input type="radio" id="Yes" name="under_30" value="{{recipe.under_30}}">
+                                    <input type="radio" id="Yes" name="under_30" value="1">
                                     <label for="Yes" class="text-light ms-2">Yes</label>
                                 </section>
                                 <section class="d-flex align-items-center ms-3 mb-4">
-                                    <input type="radio" id="No" name="under_30" value="{{recipe.under_30}}">
+                                    <input type="radio" id="No" name="under_30" value="0">
                                     <label for="No" class="text-light ms-2">No</label>
                                 </section>
                             </fieldset>

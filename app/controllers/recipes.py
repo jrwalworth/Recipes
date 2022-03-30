@@ -45,16 +45,39 @@ def edit_recipe(id):
     return render_template('edit_recipe.html', recipe=recipe)
     
     
-@app.route('/recipes/<int:id>/update', methods=['POST'])
-def update_recipe_in_db(id):
+@app.route('/recipes/update', methods=['POST'])
+def update_recipe_in_db():
     data = {
         "id" : id,
         "name" : request.form['name'],
         "description" : request.form['description'],
         "instructions" : request.form['instructions'],
         "data_made" : request.form['date_made'],
-        "under_30" : request.form['under_30'],
-        "user_id" : request.form['user_id']
+        "under_30" : int(request.form['under_30']),
+        # "user_id" : request.form['user_id']
     }
     Recipe.update(data)
     return redirect('/dashboard')
+
+#Delete recipe
+@app.route('/recipes/<int:id>/delete')
+def delete_recipe(id):
+    data = {
+        "id": id,
+    }
+    Recipe.delete(data)
+    return redirect('/dashboard')
+
+
+@app.route('/recipes/<int:id>')
+def show_recipe(id):
+    if 'user_id' not in session:
+        flash('You must be logged in to view this page.')
+        return redirect('/')
+    data = {
+        'id': id,
+    }
+    udata = {
+        'id' : session['user_id']
+    }
+    return render_template('view_recipe.html', recipe=Recipe.get_one(data), user=User.get_one(udata))
