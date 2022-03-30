@@ -13,11 +13,12 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
                 {% if session['user_id'] %}
-                <li><a href="/dashboard/" class="nav-link px-2 text-white">Dashboard</a></li>
+                <li><a href="/dashboard" class="nav-link px-2 text-white">Dashboard</a></li>
                 {% endif %}
             </ul>
             <div class="text-end">
                 {% if session['user_id'] %}
+                    <span class="text-light me-2">Logged In</span>
                     <button type="button" class="btn btn-outline-light me-2"><a href="/logout">Logout</a></button>
                 {% endif %}
                 

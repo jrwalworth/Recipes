@@ -16,25 +16,59 @@
         {% block menu %} {% include 'menu.html' %}
         {% endblock menu %}
     </nav>
-    <div class="container">
-        <div class="row dash-header mb-4 d-flex align-items-center">
-            <div class="col col-9">
-                <h1 class="dash-h1">Edit Recipe</h1>
-                <!-- <h5>These are the recipes stored in the kitchen cabinet</h5> -->
-            </div>
-            <div class="col col-3">
-                <a href="/addrecipe"><button class="btn btn-outline-dark">Create Recipe</button></a>
-            </div>
+    <div class="row">
+        <div class="messages text-danger col-12">
+            {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+                {% if messages %}                            <!-- check if there are any messages -->
+                    {% for message in messages %}            <!-- loop through the messages -->
+                        <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
         </div>
+    </div>
+    <div class="row">
+        <h2 class="text-primary mt-3">Edit Recipe for {{recipe.name}}</h2>
+    </div>
+    <div class="container a-form">
         <div class="row">
-            <div class="col col-12">
-                <form action="/recipe/edit" method="post">
-
-                    
+            <div class="col">
+                <form action='/recipes/{{recipe.id}}/update' class='myForm recipeForm' method='post'>
+                    <div class="m-area mb-3 d-flex justify-content-between">
+                        <div class="col p-3">
+                            <label for="name" class="text-light mb-1">Name:</label>
+                            <input type="text" id="name" class="mb-2 form-control" name="name" value="{{recipe.name}}">
+                            <label for="description" class="text-light mb-1">Description:</label>
+                            <input type="text" id="description" class="mb-2 form-control" name="description" value="{{recipe.description}}">
+                            <label for="instructions" class="text-light mb-1">Instructions:</label>
+                            <textarea name="instructions" id="instructions" cols="30" rows="5" class="mb-4 form-control">{{recipe.instructions}}</textarea>
+                            <input type='submit' value="Edit Recipe" class="btn btn-primary btn-block">
+                            <input type="hidden" name="user_id" value="{{session.user_id}}">
+                        </div>
+                        <div class="col">
+                            <label for="date_made" class="text-light mt-3 mb-1">Date Made:</label>
+                            <input type="date" id="date_made" class="d mb-2 form-control" name="date_made" value="{{recipe.date_made}}">
+                            <fieldset>
+                                <label for="under_30" class="text-light mb-1">Under 30 minutes?</label>
+                                <section class="d-flex align-items-center ms-3">
+                                    <input type="radio" id="Yes" name="under_30" value="{{recipe.under_30}}">
+                                    <label for="Yes" class="text-light ms-2">Yes</label>
+                                </section>
+                                <section class="d-flex align-items-center ms-3 mb-4">
+                                    <input type="radio" id="No" name="under_30" value="{{recipe.under_30}}">
+                                    <label for="No" class="text-light ms-2">No</label>
+                                </section>
+                            </fieldset>
+                        </div>
+                        
+                        
+                        
+                    </div>
                 </form>
-                
             </div>
         </div>
     </div>
+
+    
 </body>
 </html>

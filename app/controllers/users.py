@@ -29,8 +29,8 @@ def register():
         flash('Something went wrong.')
         return redirect('/')
     session['user_id'] = id
-    flash('You are logged in.')
-    return redirect('/dashboard/')
+    # flash('You are logged in.')
+    return redirect('/dashboard')
 
 #hidden route from login form
 @app.route('/login', methods=['POST'])
@@ -46,12 +46,12 @@ def login():
         flash('Wrong password.')
         return redirect('/')
     session['user_id'] = user.id
-    flash('You are logged in.')
-    return redirect('/dashboard/')
+    # flash('You are logged in.')
+    return redirect('/dashboard')
 
 
 #view page after login successfully
-@app.route('/dashboard/')
+@app.route('/dashboard')
 def dashboard():
     if 'user_id' not in session:
         flash('You must be logged in to view this page.')
@@ -69,3 +69,4 @@ def logout():
     session.clear()
     # flash('You are now logged out.')
     return redirect('/')
+

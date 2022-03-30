@@ -43,13 +43,15 @@
                                 <ul class="recipe-actions d-flex justify-content-around align-items-center">
                                     <li class="r-action"><a href="">View Instructions</a></li>
                                     <!-- edit and delete actions should only display for the user who added recipe -->
-                                    <li class="r-action"><a href="">Edit</a></li>
-                                    <li class="r-action"><a href="">Delete</a></li>
+                                    {% if r.user_id == session['user_id'] %}
+                                    <li class="r-action"><a href="recipes/{{r.id}}/edit">Edit</a></li>
+                                    <li class="r-action"><a href="recipes/{{r.id}}/delete">Delete</a></li>
+                                    {% endif %}
+                                    
                                 </ul>
                             </td>
                         </tr>
                         {% endfor %}
-                        
                     </tbody>
                 </table>
                 
